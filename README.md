@@ -11,5 +11,5 @@ This repository contains the materials prepared by Emilio Zagheni<sup>[1](#UW)</
 6. Visualizing Data with Shiny 
 7. Intro to git/Github 
 
-<a name="UW">1</a>: University of Washington
+<a name="UW">1</a>: University of Washington  
 <a name="Berkeley">2</a>: University of California, Berkeley  
