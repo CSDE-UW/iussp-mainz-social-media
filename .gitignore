@@ -3,7 +3,7 @@
 .Rapp.history
 
 # Session Data files
-.RData
+*.RData
 
 # Example code in package build process
 *-Ex.R
@@ -32,7 +32,7 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
-# Twitter demo
-Twitter_demo.Rmd
+# Twitter module
+Twitter_module.Rmd
 Twitter/data/*
 Twitter/images/*

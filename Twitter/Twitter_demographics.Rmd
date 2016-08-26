@@ -1,0 +1,39 @@
+```{r}
+age_demo <- physical_activity_tweets %>% summarise(count = round(mean(age),2))
+gender_demo <- physical_activity_tweets %>% group_by(gender) %>% summarise(count = n()) %>% arrange(desc(count))
+male_race_demo <- physical_activity_tweets %>% filter(gender == "Male") %>% group_by(race) %>% summarise(count = n()) %>% arrange(desc(count))
+female_race_demo <- physical_activity_tweets %>% filter(gender == "Female") %>% group_by(race) %>% summarise(count = n()) %>% arrange(desc(count))
+male_age_demo <- physical_activity_tweets %>% filter(gender == "Male") %>% group_by(race) %>% summarise(count = round(mean(age),2))
+female_age_demo <- physical_activity_tweets %>% filter(gender == "Female") %>% group_by(race) %>% summarise(count = round(mean(age),2))
+#interactive analysis
+black_male_race_demo <- physical_activity_tweets %>% filter(gender == "Male"& race == "Black") %>% summarise(count = n()) %>% arrange(desc(count))
+white_male_race_demo <- physical_activity_tweets %>% filter(gender == "Male"& race == "White") %>% summarise(count = n()) %>% arrange(desc(count))
+asian_male_race_demo <- physical_activity_tweets %>% filter(gender == "Male"& race == "Asian") %>% summarise(count = n()) %>% arrange(desc(count))
+black_female_race_demo <- physical_activity_tweets %>% filter(gender == "Female"& race == "Black") %>% summarise(count = n()) %>% arrange(desc(count))
+white_female_race_demo <- physical_activity_tweets %>% filter(gender == "Female"& race == "White") %>% summarise(count = n()) %>% arrange(desc(count))
+asian_female_race_demo <- physical_activity_tweets %>% filter(gender == "Female"& race == "Asian") %>% summarise(count = n()) %>% arrange(desc(count))
+
+# subsetting the data by gender
+male_tweets<- subset(physical_activity_tweets, gender == "Male") female_tweets<- subset(physical_activity_tweets, gender == "Female")
+# subsetting the data by race
+black_tweets<- subset(physical_activity_tweets, race == "Black") white_tweets<- subset(physical_activity_tweets, race == "White") asian_tweets<- subset(physical_activity_tweets, race == "Asian")
+
+#interactive analysis
+black_male_tweets<- subset(physical_activity_tweets, race == "Black" & gender == "Male") white_male_tweets<- subset(physical_activity_tweets, race == "White" & gender == "Male") asian_male_tweets<- subset(physical_activity_tweets, race == "Asian" & gender == "Male")
+black_female_tweets<- subset(physical_activity_tweets, race == "Black" & gender == "Female") white_female_tweets<- subset(physical_activity_tweets, race == "White" & gender == "Female") asian_female_tweets<- subset(physical_activity_tweets, race == "Asian" & gender == "Female")
+
+
+## Compute a simple sentiment score for each tweet: number of positive words ## minus number of negative words
+scores_male<- score.sentiment(male_tweets$tweet_text,pos, neg)$score 
+scores_female <- score.sentiment(female_tweets$tweet_text,pos, neg)$score 
+scores_black<- score.sentiment(black_tweets$tweet_text,pos, neg)$score 
+scores_white <- score.sentiment(white_tweets$tweet_text,pos, neg)$score 
+scores_asian <- score.sentiment(asian_tweets$tweet_text,pos, neg)$score
+scores_black_male<- score.sentiment(black_male_tweets$tweet_text,pos, neg)$score 
+scores_white_male <- score.sentiment(white_male_tweets$tweet_text,pos, neg)$score 
+scores_asian_male <- score.sentiment(asian_male_tweets$tweet_text,pos, neg)$score
+scores_black_female<- score.sentiment(black_female_tweets$tweet_text,pos, neg)$score 
+scores_white_female <- score.sentiment(white_female_tweets$tweet_text,pos, neg)$score
+scores_asian_female <- score.sentiment(asian_female_tweets$tweet_text,pos, neg)$score
+mean(scores_male)
+```
