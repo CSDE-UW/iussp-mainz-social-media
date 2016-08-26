@@ -1,6 +1,6 @@
 # IUSSP Mainz Social Media Workshop
 
-This repository contains the materials prepared by Emilio Zagheni[^1], Kivan Polimis[^1], and Monica Alexander[^2] for the IUSSP EPC Mainz 2016 Social Medial Workshop.
+This repository contains the materials prepared by Emilio Zagheni<sup>[1](#UW)</sup>, Kivan Polimis<sup>[1](#UW)</sup>, and Monica Alexander<sup>[2](#Berkeley)</sup> for the IUSSP EPC Mainz 2016 Social Medial Workshop.
 
 ## Overview 
 1. Introductions and Intro to Workshop Goals 
@@ -11,5 +11,5 @@ This repository contains the materials prepared by Emilio Zagheni[^1], Kivan Pol
 6. Visualizing Data with Shiny 
 7. Intro to git/Github 
 
-[^1]: University of Washington  
-[^2]: University of California, Berkeley  
+<a name="UW">1</a>: University of Washington
+<a name="Berkeley">2</a>: University of California, Berkeley  
