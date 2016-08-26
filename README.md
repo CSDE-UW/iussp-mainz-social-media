@@ -6,7 +6,7 @@ This repository contains the materials prepared by Emilio Zagheni<sup>[1](#UW)</
 1. Introductions and Intro to Workshop Goals 
 2. Intro to APIs
 3. Accessing Twitter Data Using R 
-4. Analyzing Twitter Data: 
+4. Analyzing Twitter Data 
 5. Using Demographic Methods with Online Populations
 6. Visualizing Data with Shiny 
 7. Intro to git/Github 
