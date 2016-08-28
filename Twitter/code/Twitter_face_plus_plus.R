@@ -1,25 +1,22 @@
-
 # Face++ API authentication
-```{r, include=TRUE, message=FALSE, warning=FALSE, eval=FALSE}
-#' Twitter credentials for streamR and twitteR authentication
+
+# Twitter credentials for streamR and twitteR authentication
 face_plus_plus_api_key<- "FILL ME IN"
 face_plus_plus_api_secret<- "FILL ME IN"
 
 # url check with face++ api
 paste("http://apius.faceplusplus.com/v2/detection/detect?api_key=",face_plus_plus_api_key,"&api_secret=",face_plus_plus_api_secret,"&url=",tweet_pic_url[3],"&attribute=age%2Cgender%2Crace%2Csmiling%2Cpose%2Cglass",sep="")
-```
-function to estimate age, gender, etc. 
-```{r, warning=FALSE, message=FALSE}
+
+#function to estimate age, gender, etc. 
 figure_details<- function(pic_url){
   url_for_request<- paste("http://apius.faceplusplus.com/v2/detection/detect?api_key=",face_plus_plus_api_key,"&api_secret=",face_plus_plus_api_secret,"&url=",pic_url,"&attribute=age%2Cgender%2Crace%2Csmiling%2Cpose%2Cglass",sep="")
   
   return(fromJSON(getURL(url_for_request)))
 }
-```
 
-Estimating Twitter users demographic background
-* race/gender/age
-```{r, warning=FALSE, message=FALSE}
+#' Estimating Twitter users demographic background
+#' race/gender/age
+
 # make an estimator for face++ (fpp) api info 
 face_plus_plus_estimator<-c()
 
@@ -52,7 +49,6 @@ for (i in 1:length(tweets_img_table$tweet_pic_url)){
 head(face_plus_plus_table)
 
 ## write face++ table estimates to file
-health_tweets_demo = health_tweets_demo %>% filter(complete.cases(.))
 write.csv(face_plus_plus_table, "data/face_plus_plus_estimates.csv", row.names=FALSE)
 ```
 
