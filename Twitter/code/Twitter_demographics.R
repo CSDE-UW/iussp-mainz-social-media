@@ -1,3 +1,12 @@
+#---------------------------------------------------------------------------------#
+#              Workshop on Web and Social Media for Demographic Research          #
+#                                 EPC 2016                                        #
+#---------------------------------------------------------------------------------#
+#   Module:       Using R to Gather and Analyze Data from Twitter                 #
+#   Script:                   Twitter Demographics                                #
+#   Author:                     Kivan Polimis                                     #
+#---------------------------------------------------------------------------------#
+
 #' demographic characteristics of data
 age_demo <- physical_activity_tweets %>% summarise(count = round(mean(age),2))
 gender_demo <- physical_activity_tweets %>% group_by(gender) %>% summarise(count = n()) %>% arrange(desc(count))

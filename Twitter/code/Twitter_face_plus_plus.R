@@ -1,6 +1,17 @@
-# Face++ API authentication
+#---------------------------------------------------------------------------------#
+#              Workshop on Web and Social Media for Demographic Research          #
+#                                 EPC 2016                                        #
+#---------------------------------------------------------------------------------#
+#   Module:       Using R to Gather and Analyze Data from Twitter                 #
+#   Script:                Face++ API authentication                              #
+#   Author:                     Kivan Polimis                                     #
+#---------------------------------------------------------------------------------#
 
-# Twitter credentials for streamR and twitteR authentication
+library(rjson)
+library(RCurl)
+#install.packages(c("rjson","RCurl"))
+
+#' Face++ API authentication
 face_plus_plus_api_key<- "FILL ME IN"
 face_plus_plus_api_secret<- "FILL ME IN"
 
@@ -26,7 +37,7 @@ colnames(face_plus_plus_table)<-c("age","range","gender","race")
 
 # apply figure details function to tweets img data frame
 for (i in 1:length(tweets_img_table$tweet_pic_url)){
-  fpp_est<- try(figure_details(tweets_img_table$tweet_pic_url[i]),silent=TRUE)
+  face_plus_plus_estimator<- try(figure_details(tweets_img_table$tweet_pic_url[i]),silent=TRUE)
   # if face++ API unable to generate estimate, face list is length 0
   if (length(face_plus_plus_estimator$face) == 0)
   {
@@ -39,10 +50,10 @@ for (i in 1:length(tweets_img_table$tweet_pic_url)){
   # if face++ API able to generate estimate, face list is length 1
   else if (length(face_plus_plus_estimator$face) == 1) 
   {
-    fpp_matrix[i,1]<-face_plus_plus_estimator$face[[1]]$attribute$age['value']$value[1]
-    fpp_matrix[i,2]<-face_plus_plus_estimator$face[[1]]$attribute$age['range']$range[1]
-    fpp_matrix[i,3]<-face_plus_plus_estimator$face[[1]]$attribute$gender$value[1]
-    fpp_matrix[i,4]<-face_plus_plus_estimator$face[[1]]$attribute$race$value[1]
+    face_plus_plus_table[i,1]<-face_plus_plus_estimator$face[[1]]$attribute$age['value']$value[1]
+    face_plus_plus_table[i,2]<-face_plus_plus_estimator$face[[1]]$attribute$age['range']$range[1]
+    face_plus_plus_table[i,3]<-face_plus_plus_estimator$face[[1]]$attribute$gender$value[1]
+    face_plus_plus_table[i,4]<-face_plus_plus_estimator$face[[1]]$attribute$race$value[1]
   }
 }
 
