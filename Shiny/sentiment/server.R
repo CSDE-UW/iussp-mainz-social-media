@@ -1,4 +1,5 @@
 library(shiny)
+library(ggplot2)
 library(plyr)
 library(dplyr)
 library(lubridate)
@@ -10,15 +11,10 @@ shinyServer(function(input, output) {
   output$distPlot <- renderPlot({
     d_year <- d %>% filter(year(user_created_at) == input$year)
     p <- ggplot(data = d_year, aes(x = sentiment_score, fill = gender)) + 
-      #geom_histogram(data = d,
-      #           binwidth = 1,
-      #           aes(x = sentiment_score, 
-      #               y = (..count..)/sum(..count..)),
-      #           fill = 'grey')+
       geom_histogram(binwidth = 1, 
                      aes(y = (..count..)/sum(..count..)),  col = 'darkgrey') + 
       scale_fill_brewer(palette = "Set1") + 
-      ggtitle("Distribution of Exercise Sentiment Scores")+
+      ggtitle("Distribution of exercise sentiment scores")+
       theme_bw()+
       xlab("Sentiment score")+
       ylab("Proportion")
@@ -31,8 +27,8 @@ shinyServer(function(input, output) {
     d_year$pyramid_age <- findInterval(d_year$age, pyramid_ages)
     counts_by_age <- count(d_year, pyramid_age, gender)
     counts_by_age$freq <- NA
-    counts_by_age$freq[counts_by_age$gender=='Female'] <- counts_by_age$n[counts_by_age$gender=='Female'] /nrow(d)
-    counts_by_age$freq[counts_by_age$gender=='Male'] <- counts_by_age$n[counts_by_age$gender=='Male'] /nrow(d)
+    counts_by_age$freq[counts_by_age$gender=='Female'] <- counts_by_age$n[counts_by_age$gender=='Female'] /nrow(d_year)
+    counts_by_age$freq[counts_by_age$gender=='Male'] <- counts_by_age$n[counts_by_age$gender=='Male'] /nrow(d_year)
     ages <- c("0-4",  "5-9" , "10-14", "15-19",
               "20-24", "25-29", "30-34", "35-39",
               "40-44", "45-49", "50-54", "55-59",
@@ -54,7 +50,7 @@ shinyServer(function(input, output) {
     maintitle <- paste0("Age distribution in ", input$year)
     p1 <- ggplot(pd, aes(x = age, y = percent, fill = gender)) + 
       geom_bar(stat = "identity", position = "identity")+
-      scale_y_continuous(breaks = seq(-0.4, 0.4, 0.1), labels = as.character(c(4:0, 1:4))) +
+      scale_y_continuous(breaks = seq(-0.7, 0.7, 0.1), labels = as.character(c(7:0, 1:7))) +
       coord_flip()+
       scale_fill_brewer(palette = "Set1") + 
       theme_bw()+

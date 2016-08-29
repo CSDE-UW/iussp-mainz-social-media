@@ -1,4 +1,5 @@
 library(shiny)
+library(ggplot2)
 library(plyr)
 library(dplyr)
 library(lubridate)
@@ -12,7 +13,7 @@ shinyUI(
     
     # Give the page a title
     title = "Exercise Sentiment on Twitter",  
-    h3("Exercise Sentiment on Twitter"),
+    h3("Sentiment about Exercise on Twitter"),
     
     # Define the sidebar with one input
     fluidRow(
