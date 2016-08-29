@@ -1,4 +1,8 @@
 library(shiny)
+library(plyr)
+library(dplyr)
+library(lubridate)
+
 d <- read.csv("physical_activity_tweets.csv")
 
 shinyServer(function(input, output) {
