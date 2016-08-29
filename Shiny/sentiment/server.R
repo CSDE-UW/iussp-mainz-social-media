@@ -50,7 +50,7 @@ shinyServer(function(input, output) {
     maintitle <- paste0("Age distribution in ", input$year)
     p1 <- ggplot(pd, aes(x = age, y = percent, fill = gender)) + 
       geom_bar(stat = "identity", position = "identity")+
-      scale_y_continuous(breaks = seq(-0.7, 0.7, 0.1), labels = as.character(c(7:0, 1:7))) +
+      scale_y_continuous(breaks = seq(-0.4, 0.4, 0.1), labels = as.character(c(4:0, 1:4)*10)) +
       coord_flip()+
       scale_fill_brewer(palette = "Set1") + 
       theme_bw()+
