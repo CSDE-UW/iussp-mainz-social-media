@@ -266,22 +266,60 @@ setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_token_se
 <h2>Gather Data</h2>
 <div id="search-tweets-by-location" class="section level3">
 <h3>Search tweets by location</h3>
-<p>Search for tweets by location using twitteR package functions. The functions below interact with the trend portion of the Twitter API. Use Where on Earth Identifiers <a href="https://developer.yahoo.com/geo/geoplanet/guide/concepts.html" target="_blank">(WOEID)</a> for locations * availableTrendLocations * getTrends</p>
+<p>Search for tweets by location using twitteR package functions. The functions below interact with the trend portion of the Twitter API. Use Where on Earth Identifiers <a href="https://developer.yahoo.com/geo/geoplanet/guide/concepts.html" target="_blank">(WOEID)</a> for locations</p>
+<ul>
+<li>availableTrendLocations</li>
+<li>getTrends</li>
+</ul>
 <p>View column names and small subset of observations with <code>glimpse</code> command</p>
-<pre class="r"><code>availableTrendLocations() 
+<pre class="r"><code>#availableTrendLocations() 
 woeid = availableTrendLocations()
 glimpse(woeid)
 
-#' get trending D.C. area tweets
-Mainz_tweets = getTrends(673515)
-glimpse(Mainz_tweets)</code></pre>
-<pre class="r"><code>#' trending hashtags
-glimpse(Mainz_tweets$name)
-getCommonHashtags(Mainz_tweets$name)</code></pre>
+#' get trending Frankfurt area tweets
+Frankfurt_tweets = getTrends(650272)
+glimpse(Frankfurt_tweets)
+
+#' trending hashtags
+glimpse(Frankfurt_tweets$name)
+getCommonHashtags(Frankfurt_tweets$name)</code></pre>
+<pre><code>## Observations: 48
+## Variables: 4
+## $ name  &lt;chr&gt; &quot;#NALCS&quot;, &quot;Gewitter&quot;, &quot;#traumfraugesucht&quot;, &quot;#DeineMutter...
+## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23NALCS&quot;, &quot;http://twitter....
+## $ query &lt;chr&gt; &quot;%23NALCS&quot;, &quot;Gewitter&quot;, &quot;%23traumfraugesucht&quot;, &quot;%23Deine...
+## $ woeid &lt;chr&gt; &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;65027...</code></pre>
+<pre><code>##  chr [1:48] &quot;#NALCS&quot; &quot;Gewitter&quot; &quot;#traumfraugesucht&quot; ...</code></pre>
+<pre><code>## hashtags
+##                 #BelgianGP                 #besteShow 
+##                          1                          1 
+##                    #BMGB04                    #bpt162 
+##                          1                          1 
+##                    #bvbm05          #DeineMutterWitze 
+##                          1                          1 
+##                    #Didavi                     #EULCS 
+##                          1                          1 
+##                    #FCHFSV                   #glowcon 
+##                          1                          1 
+##                    #HSVFCI #justinssextapeleakedparty 
+##                          1                          1 
+##             #Kirmeskoenige                    #KOED98 
+##                          1                          1 
+##              #koellesterin                    #kscm60 
+##                          1                          1 
+##       #langenachtdermuseen                    #le2708 
+##                          1                          1 
+##      #LoveIsLarryStylinson                  #Matchday 
+##                          1                          1</code></pre>
 </div>
 <div id="search-twitter-stream-by-subject" class="section level3">
 <h3>Search Twitter stream by subject</h3>
-<p>Search for tweets by subject using streamR package functions. The streamR functions interact with Twitter’s Streaming API to filter tweets by keywords, users, language, and location. See this <a href="http://pablobarbera.com/code/streamR.html" target="_blank">streamR vignette</a> by Pablo Barbera for more information about the package. * filterStream * parseTweets</p>
+<p>Search for tweets by subject using streamR package functions. The streamR functions interact with Twitter’s Streaming API to filter tweets by keywords, users, language, and location. See this <a href="http://pablobarbera.com/code/streamR.html" target="_blank">streamR vignette</a> by Pablo Barbera for more information about the package.</p>
+<ul>
+<li>filterStream</li>
+<li>readTweets</li>
+<li>parseTweets</li>
+</ul>
 <pre class="r"><code>physical_activity_tweet_stream&lt;-filterStream(&quot;data/physical_activity_tweets.json&quot;, timeout = 120, 
                                              language = &quot;en&quot;, track = c(&quot;#walking, #biking, #running, 
                                              #jogging, #pushups, #pullups, #homeworkouts,
@@ -317,55 +355,104 @@ head(tweets_img_table)
 #}
 #head(tweets_img_table)
 
-write.csv(tweets_table, &quot;data/tweets_table.csv&quot;, row.names = FALSE)
+write.csv(tweets_table, &quot;data/physical_activity_tweets.csv&quot;, row.names = FALSE)
 
-
-parsed_physical_activity_tweets = parseTweets(&quot;data/physical_activity_tweets.json&quot;)
-write.csv(parsed_physical_activity_tweets, &quot;data/parsed_physical_activity_tweets.csv&quot;, row.names = FALSE)
-parsed_physical_activity_tweets = tbl_df(read.csv(&quot;data/parsed_physical_activity_tweets.csv&quot;,
-                                                  fileEncoding=&quot;latin1&quot;))
-physical_activity_tweets = tbl_df(read.csv(&quot;physical_activity_tweets.csv&quot;))
-names(parsed_physical_activity_tweets)
-physical_activity_tweets_location = parsed_physical_activity_tweets %&gt;% select(name, id_str, user_created_at,
-                                                                               lat, lon)</code></pre>
-<pre class="r"><code>age_demo &lt;- physical_activity_tweets %&gt;% summarise(count = round(mean(age),2))
+physical_activity_tweets = tbl_df(read.csv(&quot;data/physical_activity_tweets.csv&quot;))</code></pre>
+</div>
+</div>
+<div id="view-summary-statistics" class="section level2">
+<h2>View summary statistics</h2>
+<pre class="r"><code>#' demographic characteristics of data
+age_demo &lt;- physical_activity_tweets %&gt;% summarise(count = round(mean(age),2))
 gender_demo &lt;- physical_activity_tweets %&gt;% group_by(gender) %&gt;% summarise(count = n()) %&gt;% arrange(desc(count))
 male_race_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Male&quot;) %&gt;% group_by(race) %&gt;% summarise(count = n()) %&gt;% arrange(desc(count))
 female_race_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Female&quot;) %&gt;% group_by(race) %&gt;% summarise(count = n()) %&gt;% arrange(desc(count))
 male_age_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Male&quot;) %&gt;% group_by(race) %&gt;% summarise(count = round(mean(age),2))
-female_age_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Female&quot;) %&gt;% group_by(race) %&gt;% summarise(count = round(mean(age),2))
-
-# subsetting the data by gender
+female_age_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Female&quot;) %&gt;% group_by(race) %&gt;% summarise(count = round(mean(age),2))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   count
+##   &lt;dbl&gt;
+## 1 26.66</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   gender  count
+##   &lt;fctr&gt;  &lt;int&gt;
+## 1 Female 386294
+## 2   Male 212196</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##     race  count
+##   &lt;fctr&gt;  &lt;int&gt;
+## 1  White 170737
+## 2  Asian  24236
+## 3  Black  17223</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##     race count
+##   &lt;fctr&gt; &lt;dbl&gt;
+## 1  Asian 27.10
+## 2  Black 26.61
+## 3  White 30.70</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##     race  count
+##   &lt;fctr&gt;  &lt;int&gt;
+## 1  White 323660
+## 2  Asian  49131
+## 3  Black  13503</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##     race count
+##   &lt;fctr&gt; &lt;dbl&gt;
+## 1  Asian 21.12
+## 2  Black 22.52
+## 3  White 25.50</code></pre>
+</div>
+<div id="subset-the-data" class="section level2">
+<h2>Subset the data</h2>
+<pre class="r"><code>#' subsetting the data by gender
 male_tweets&lt;- subset(physical_activity_tweets, gender == &quot;Male&quot;)
 female_tweets&lt;- subset(physical_activity_tweets, gender == &quot;Female&quot;)
-# subsetting the data by race
+
+#' subsetting the data by race
 black_tweets&lt;- subset(physical_activity_tweets, race == &quot;Black&quot;) 
 white_tweets&lt;- subset(physical_activity_tweets, race == &quot;White&quot;) 
 asian_tweets&lt;- subset(physical_activity_tweets, race == &quot;Asian&quot;)</code></pre>
+</div>
+<div id="sentiment-analysis" class="section level2">
+<h2>Sentiment Analysis</h2>
 <pre class="r"><code># import positive and negative words
 pos = readLines(&quot;opinion_lexicon/positive_words.txt&quot;)
 neg = readLines(&quot;opinion_lexicon/negative_words.txt&quot;)
 source(&quot;opinion_lexicon/sentiment.R&quot;)
-glimpse(pos)</code></pre>
+glimpse(pos)
+glimpse(neg)
+
+#' to see all the words in each list, uncomment the two commands below
+#pos
+#neg</code></pre>
 <pre><code>##  chr [1:2006] &quot;a+&quot; &quot;abound&quot; &quot;abounds&quot; &quot;abundance&quot; &quot;abundant&quot; ...</code></pre>
-<pre class="r"><code>glimpse(neg)</code></pre>
 <pre><code>##  chr [1:4783] &quot;2-faced&quot; &quot;2-faces&quot; &quot;abnormal&quot; &quot;abolish&quot; ...</code></pre>
-<pre class="r"><code>#' to see all the words in each list, uncomment the two commands below
-#' pos
-#' neg</code></pre>
+<div id="sentiment-scores-by-demographic-group" class="section level3">
+<h3>Sentiment scores by demographic group</h3>
 <pre class="r"><code>#' Compute a simple sentiment score for each tweet 
 #' sentiment score = number of positive words  minus number of negative words
 scores_male&lt;- score.sentiment(male_tweets$text,pos, neg)$score 
 scores_female &lt;- score.sentiment(female_tweets$text,pos, neg)$score 
 scores_black&lt;- score.sentiment(black_tweets$text,pos, neg)$score 
 scores_white &lt;- score.sentiment(white_tweets$text,pos, neg)$score 
-scores_asian &lt;- score.sentiment(asian_tweets$text,pos, neg)$score
-
-#subset$created_at_lubridate = sapply(subset$user_created_at,tweet_time)
-
-#t = inner_join(tweets_img_table, health_tweets_demo, by = &quot;name&quot;)</code></pre>
+scores_asian &lt;- score.sentiment(asian_tweets$text,pos, neg)$score</code></pre>
+</div>
+</div>
+<div id="average-sentiment-by-demographic-background" class="section level2">
+<h2>Average sentiment by demographic background</h2>
+<pre><code>## # A tibble: 5 × 3
+##    group `mean score` `score st. dev`
+##    &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;
+## 1   male         0.42            1.08
+## 2 female         0.36            1.11
+## 3  black         0.23            1.03
+## 4  white          0.4            1.11
+## 5  asian         0.36            1.07</code></pre>
+<div id="save-workspace" class="section level3">
+<h3>Save workspace</h3>
 <p>Save all objects in your current workspace and read back from file in the future</p>
-<pre class="r"><code>#save.image(file = &quot;EPC2016-Mainz-Twitter.RData&quot;)
+<pre class="r"><code>save.image(file = &quot;EPC2016-Mainz-Twitter.RData&quot;)
 
 #' future R sessions will require you to reload necessary libraries
 #' uncomment the command below to load saved objects in future workspace sessions

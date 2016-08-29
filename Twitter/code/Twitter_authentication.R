@@ -3,6 +3,7 @@
 #                                 EPC 2016                                        #
 #---------------------------------------------------------------------------------#
 #   Module:       Using R to Gather and Analyze Data from Twitter                 #
+#   Script:                   Twitter Authentication                              #
 #   Author:                     Kivan Polimis                                     #
 #---------------------------------------------------------------------------------#
 
