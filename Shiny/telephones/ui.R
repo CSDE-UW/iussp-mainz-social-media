@@ -1,3 +1,5 @@
+## Code source: http://shiny.rstudio.com/gallery/telephones-by-region.html
+
 library(shiny)
 
 # Rely on the 'WorldPhones' dataset in the datasets
