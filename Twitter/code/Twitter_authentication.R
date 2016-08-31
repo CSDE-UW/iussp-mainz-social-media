@@ -10,7 +10,7 @@
 #' Clearing workspace, setting working directory, and loading required packages.
 #' Change FILL ME in with the file path that includes the folder you created for this workshop
 rm(list=ls())
-setwd("FILL ME IN/iussp-mainz-social-media/Twitter")
+setwd("FILL ME IN/iussp-mainz-social-media/Twitter/code")
 
 #' install.packages(c("twitteR","streamR","ROAuth"))
 library(twitteR)

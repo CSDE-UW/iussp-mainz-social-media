@@ -9,7 +9,7 @@
 
 #' set working directory
 rm(list=ls())
-setwd("FILL ME IN/iussp-mainz-social-media/Twitter")
+setwd("FILL ME IN/iussp-mainz-social-media/Twitter/code")
 
 #install.packages(c("plyr", "dplyr", "tidyr"))
 
@@ -18,7 +18,7 @@ library(plyr)
 library(dplyr)
 library(tidyr)
 
-#physical_activity_tweets = tbl_df(read.csv("data/physical_activity_tweets.csv"))
+#physical_activity_tweets = tbl_df(read.csv("../data/physical_activity_tweets.csv"))
 
 #' demographic characteristics of data
 age_demo <- physical_activity_tweets %>% summarise(count = round(mean(age),2))
