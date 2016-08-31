@@ -46,6 +46,9 @@ expand_limits(x = map.data$long, y = map.data$lat) +
 theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = element_blank(),
     axis.title = element_blank(), panel.background = element_blank(), panel.border = element_blank(), panel.grid.major = element_blank(), plot.background = element_blank(), plot.margin = unit(0 * c(-1.5, -1.5, -1.5, -1.5), "lines")) + geom_point(data = points, aes(x = x, y = y), size = .1, alpha = 1/5, color = "darkblue")
 
+#' create a folder to save images
+system("mkdir ../images")
+
 #' save map as a .png
 png(filename="../images/tweets-map.png", height = 480 , width = 720, units = "px")
 plot(tweets.map)
