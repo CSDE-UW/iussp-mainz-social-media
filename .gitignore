@@ -35,4 +35,4 @@ vignettes/*.pdf
 # Twitter module
 Twitter_module.Rmd
 Twitter/data/*
-Twitter/images/*.png
+Twitter/images/*
