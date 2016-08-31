@@ -2,7 +2,7 @@
 # Create lubridate date time objects from vector of tweets created at date
 ################################################################################
 
-tweet_time<-function(tweet_datestring){
+lubridate_tweet_datestring<-function(tweet_datestring){
   #' @author Kivan Polimis \email{kivan.polimis@gmail.com}
   #' @description create datestring of tweets that is manageable by lubridate package
   #' @param tweet_datestring: vector of tweet times created by filterStream (from streamR package)

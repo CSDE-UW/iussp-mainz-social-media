@@ -17,11 +17,16 @@ library(twitteR)
 library(streamR)
 library(ROAuth)
 
+#' uncommenting the following lines may help install twitteR package
+#install.packages("devtools")
+#library(devtools)
+#devtools::install_github("jrowen/twitteR", ref = "oauth_httr_1_0")
+
 #' Twitter credentials for streamR and twitteR authentication
-consumer_key <- "FILL ME IN"
-consumer_secret<- "FILL ME IN"
-access_token<- "FILL ME IN"
-access_token_secret<- "FILL ME IN"
+twitter_api_key <- "FILL ME IN"
+twitter_api_secret<- "FILL ME IN"
+twitter_access_token<- "FILL ME IN"
+twitter_access_token_secret<- "FILL ME IN"
 
 #' parameters and URLs for streamR authentication
 reqURL <- "https://api.twitter.com/oauth/request_token"
@@ -33,7 +38,7 @@ authURL<- "https://api.twitter.com/oauth/authorize"
 #download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile="cacert.pem")
 
 #' create an object "cred" that will save the authenticated object for later sessions
-twitCred<- OAuthFactory$new(consumerKey=consumer_key,consumerSecret=consumer_secret,
+twitCred<- OAuthFactory$new(consumerKey=twitter_api_key,consumerSecret=twitter_api_secret,
                             requestURL=reqURL,accessURL=accessURL,authURL=authURL)
 
 #' insert the number in the R console after you run this line
@@ -47,4 +52,5 @@ save(twitCred, file = "twitCred.RData")
 #' you will be prompted to cache authentication token
 #' you will need to repeat this step unless you are running analysis from a location with a
 #' cached authentication token 
-setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_token_secret)
+setup_twitter_oauth(twitter_api_key, twitter_api_secret,
+                    twitter_access_token, twitter_access_token_secret)
