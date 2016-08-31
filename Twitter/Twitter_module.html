@@ -209,7 +209,7 @@ library(base64enc)
 #' Pablo Barbera, author of streamR, has written additional functions for Twitter analysis
 #' uncomment the two commands below to download and add these functions to your environment with source
 #download.file(&quot;https://raw.githubusercontent.com/pablobarbera/social-media-workshop/master/functions.r&quot;, &quot;functions_by_pablobarbera.R&quot;)
-#source(&quot;src/functions_by_pablobarbera.R&quot;)
+source(&quot;src/functions_by_pablobarbera.R&quot;)
 
 #' few functions to clean data
 source(&quot;src/twitterFunctions.R&quot;) </code></pre>
@@ -289,13 +289,13 @@ glimpse(Frankfurt_tweets)
 #' trending hashtags
 glimpse(Frankfurt_tweets$name)
 getCommonHashtags(Frankfurt_tweets$name)</code></pre>
-<pre><code>## Observations: 45
+<pre><code>## Observations: 44
 ## Variables: 4
-## $ name  &lt;chr&gt; &quot;#DeadlineDay&quot;, &quot;#biu16&quot;, &quot;#Wirschaffendas&quot;, &quot;#Dash&quot;, &quot;#...
+## $ name  &lt;chr&gt; &quot;#DeadlineDay&quot;, &quot;#Wirschaffendas&quot;, &quot;#biu16&quot;, &quot;#Dash&quot;, &quot;#...
 ## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23DeadlineDay&quot;, &quot;http://tw...
-## $ query &lt;chr&gt; &quot;%23DeadlineDay&quot;, &quot;%23biu16&quot;, &quot;%23Wirschaffendas&quot;, &quot;%23D...
+## $ query &lt;chr&gt; &quot;%23DeadlineDay&quot;, &quot;%23Wirschaffendas&quot;, &quot;%23biu16&quot;, &quot;%23D...
 ## $ woeid &lt;chr&gt; &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;65027...</code></pre>
-<pre><code>##  chr [1:45] &quot;#DeadlineDay&quot; &quot;#biu16&quot; &quot;#Wirschaffendas&quot; &quot;#Dash&quot; ...</code></pre>
+<pre><code>##  chr [1:44] &quot;#DeadlineDay&quot; &quot;#Wirschaffendas&quot; &quot;#biu16&quot; &quot;#Dash&quot; ...</code></pre>
 <pre><code>## hashtags
 ##            #Alexanderplatz                      #Apps 
 ##                          1                          1 
@@ -311,11 +311,11 @@ getCommonHashtags(Frankfurt_tweets$name)</code></pre>
 ##                          1                          1 
 ##              #Energiewende              #ESLProLeague 
 ##                          1                          1 
-##         #GetWellSoonSelena       #IWillBeOkayAsSoonAs 
+##                  #Eurobike                   #Fraport 
 ##                          1                          1 
-##             #KingOfSpandau                      #Lanz 
+##                    #GERFIN         #GetWellSoonSelena 
 ##                          1                          1 
-##         #LegendsOfTomorrow                    #Legion 
+##        #goodbyedeutschland                    #Hartz4 
 ##                          1                          1</code></pre>
 </div>
 <div id="search-twitter-stream-by-subject" class="section level3">
@@ -475,11 +475,20 @@ glimpse(neg)
 <h3>Sentiment scores by demographic group</h3>
 <pre class="r"><code>#' Compute a simple sentiment score for each tweet 
 #' sentiment score = number of positive words  minus number of negative words
-scores_male&lt;- score.sentiment(male_tweets$text,pos, neg)$score 
-scores_female &lt;- score.sentiment(female_tweets$text,pos, neg)$score 
-scores_black&lt;- score.sentiment(black_tweets$text,pos, neg)$score 
-scores_white &lt;- score.sentiment(white_tweets$text,pos, neg)$score 
-scores_asian &lt;- score.sentiment(asian_tweets$text,pos, neg)$score</code></pre>
+
+#' to save time, sample 1000 tweets from each demographic subset for sentiment scores
+male_tweets_sample =  sample_n(male_tweets, 1000)
+female_tweets_sample =  sample_n(female_tweets, 1000)
+black_tweets_sample =  sample_n(black_tweets, 1000)
+white_tweets_sample =  sample_n(white_tweets, 1000)
+asian_tweets_sample =  sample_n(asian_tweets, 1000)
+
+#' sentiment scores
+scores_male&lt;- score.sentiment(male_tweets_sample$text,pos, neg)$score 
+scores_female &lt;- score.sentiment(female_tweets_sample$text,pos, neg)$score 
+scores_black&lt;- score.sentiment(black_tweets_sample$text,pos, neg)$score 
+scores_white &lt;- score.sentiment(white_tweets_sample$text,pos, neg)$score 
+scores_asian &lt;- score.sentiment(asian_tweets_sample$text,pos, neg)$score</code></pre>
 </div>
 </div>
 <div id="average-sentiment-by-demographic-background" class="section level2">
@@ -487,11 +496,11 @@ scores_asian &lt;- score.sentiment(asian_tweets$text,pos, neg)$score</code></pre
 <pre><code>## # A tibble: 5 × 3
 ##    group `mean score` `score st. dev`
 ##    &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;
-## 1   male         0.42            1.08
-## 2 female         0.36            1.11
-## 3  black         0.23            1.03
-## 4  white          0.4            1.11
-## 5  asian         0.36            1.07</code></pre>
+## 1   male         0.42            1.07
+## 2 female         0.44            1.07
+## 3  black         0.24            1.03
+## 4  white          0.4            1.05
+## 5  asian         0.37            1.04</code></pre>
 <div id="save-workspace" class="section level3">
 <h3>Save workspace</h3>
 <p>Save all objects in your current workspace and read back from file in the future</p>
