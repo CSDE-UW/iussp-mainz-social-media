@@ -210,11 +210,20 @@ glimpse(neg)
 ### Sentiment scores by demographic group ##
 #' Compute a simple sentiment score for each tweet 
 #' sentiment score = number of positive words  minus number of negative words
-scores_male<- score.sentiment(male_tweets$text,pos, neg)$score 
-scores_female <- score.sentiment(female_tweets$text,pos, neg)$score 
-scores_black<- score.sentiment(black_tweets$text,pos, neg)$score 
-scores_white <- score.sentiment(white_tweets$text,pos, neg)$score 
-scores_asian <- score.sentiment(asian_tweets$text,pos, neg)$score
+
+#' to save time, sample 1000 tweets from each demographic subset for sentiment scores
+male_tweets_sample =  sample_n(male_tweets, 1000)
+female_tweets_sample =  sample_n(female_tweets, 1000)
+black_tweets_sample =  sample_n(black_tweets, 1000)
+white_tweets_sample =  sample_n(white_tweets, 1000)
+asian_tweets_sample =  sample_n(asian_tweets, 1000)
+
+#' sentiment scores
+scores_male<- score.sentiment(male_tweets_sample$text,pos, neg)$score 
+scores_female <- score.sentiment(female_tweets_sample$text,pos, neg)$score 
+scores_black<- score.sentiment(black_tweets_sample$text,pos, neg)$score 
+scores_white <- score.sentiment(white_tweets_sample$text,pos, neg)$score 
+scores_asian <- score.sentiment(asian_tweets_sample$text,pos, neg)$score
 
 ## Average sentiment by demographic background ##
 #' sentiment score table
@@ -222,7 +231,7 @@ group_names <- c("male", "female", "black", "white", "asian")
 group_score_values<-round(rbind(mean(scores_male),mean(scores_female),mean(scores_black), mean(scores_white), mean(scores_asian)),2)
 group_score_sd<-round(rbind(sd(scores_male),sd(scores_female),sd(scores_black), sd(scores_white), sd(scores_asian)),2)
 
-group_score_df = tbl_df(cbind(group_names, group_score_values, group_score_sd))
+group_score_df = tbl_df(as.data.frame(cbind(group_names, group_score_values, group_score_sd)))
 colnames(group_score_df) = c("group", "mean score", "score st. dev")
 group_score_df
 
