@@ -7,7 +7,7 @@ library(dplyr)
 library(lubridate)
 
 # load in the data
-d <- read.csv("Twitter/physical_activity_tweets.csv")
+d <- read.csv("../Twitter/physical_activity_tweets.csv")
 head(d)
 
 ## ggplot2 works in layers:
