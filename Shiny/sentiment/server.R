@@ -1,3 +1,6 @@
+## Exercise sentiment shiny app
+## Monica Alexander, August 2016
+
 library(shiny)
 library(ggplot2)
 library(plyr)
