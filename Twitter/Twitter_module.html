@@ -291,25 +291,25 @@ glimpse(Frankfurt_tweets$name)
 getCommonHashtags(Frankfurt_tweets$name)</code></pre>
 <pre><code>## Observations: 50
 ## Variables: 4
-## $ name  &lt;chr&gt; &quot;#TrashTVTalk&quot;, &quot;#GetWellSoonSelena&quot;, &quot;#IWillBeOkayAsSoo...
-## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23TrashTVTalk&quot;, &quot;http://tw...
-## $ query &lt;chr&gt; &quot;%23TrashTVTalk&quot;, &quot;%23GetWellSoonSelena&quot;, &quot;%23IWillBeOka...
+## $ name  &lt;chr&gt; &quot;#GetWellSoonSelena&quot;, &quot;#IWillBeOkayAsSoonAs&quot;, &quot;#PLLDeath...
+## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23GetWellSoonSelena&quot;, &quot;htt...
+## $ query &lt;chr&gt; &quot;%23GetWellSoonSelena&quot;, &quot;%23IWillBeOkayAsSoonAs&quot;, &quot;%23PL...
 ## $ woeid &lt;chr&gt; &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;65027...</code></pre>
-<pre><code>##  chr [1:50] &quot;#TrashTVTalk&quot; &quot;#GetWellSoonSelena&quot; ...</code></pre>
+<pre><code>##  chr [1:50] &quot;#GetWellSoonSelena&quot; &quot;#IWillBeOkayAsSoonAs&quot; ...</code></pre>
 <pre><code>## hashtags
-##                   #Apple            #Battlefield1                #BoKoWiTa 
+##         #AeDilHaiMushkil                   #Apple            #Battlefield1 
 ##                        1                        1                        1 
-##               #chatduell   #DagiLiebtIhreFansWeil                    #DHDL 
+##                #BoKoWiTa               #chatduell   #DagiLiebtIhreFansWeil 
 ##                        1                        1                        1 
-##      #DolanTwinsNewVideo                 #Draxler                #edchatde 
+##                    #DHDL      #DolanTwinsNewVideo                 #Draxler 
 ##                        1                        1                        1 
-##            #Energiewende            #ESLProLeague                  #FCKF95 
+##                #edchatde            #Energiewende            #ESLProLeague 
 ##                        1                        1                        1 
-##               #Frontal21 #GameofThronesVsTeenWolf                  #GERFIN 
+##                  #FCKF95               #Frontal21 #GameofThronesVsTeenWolf 
 ##                        1                        1                        1 
-##       #GetWellSoonSelena                  #Gnabry                    #gzsz 
+##                  #GERFIN       #GetWellSoonSelena                  #Gnabry 
 ##                        1                        1                        1 
-##                    #Hama                   #Hartz 
+##                    #gzsz                    #Hama 
 ##                        1                        1</code></pre>
 </div>
 <div id="search-twitter-stream-by-subject" class="section level3">
@@ -362,6 +362,8 @@ head(tweets_img_table)
 #' use Twitter_face_plus_plus.R here to create Face++ API demographic estimates
 #' join tweets_img_table with Face++ demographic estimates
 #' convert user_created_at into lubridate object with lubridate_tweet_datestring function
+#' example of advantages of lubridate object: plotting,algebraic manipulation on date-time objects.
+#hist(year(physical_activity_tweets$user_created_at))
 #tweets_img_table$user_timestamp = sapply(tweets_img_table$user_created_at,lubridate_tweet_datestring)
 #drops = &quot;user_created_at&quot;
 #tweets_img_table = tweets_img_table[, !(names(tweets_img_table) %in% drops)]
@@ -387,6 +389,9 @@ male_race_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Male
 female_race_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Female&quot;) %&gt;% group_by(race) %&gt;% summarise(count = n()) %&gt;% arrange(desc(count))
 male_age_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Male&quot;) %&gt;% group_by(race) %&gt;% summarise(count = round(mean(age),2))
 female_age_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Female&quot;) %&gt;% group_by(race) %&gt;% summarise(count = round(mean(age),2))</code></pre>
+</div>
+<div id="mean-age-and-gender-counts" class="section level3">
+<h3>mean age and gender counts</h3>
 <pre><code>## # A tibble: 1 × 1
 ##   count
 ##   &lt;dbl&gt;
@@ -396,18 +401,24 @@ female_age_demo &lt;- physical_activity_tweets %&gt;% filter(gender == &quot;Fem
 ##   &lt;fctr&gt;  &lt;int&gt;
 ## 1 Female 386294
 ## 2   Male 212196</code></pre>
-<pre><code>## # A tibble: 3 × 2
-##     race  count
-##   &lt;fctr&gt;  &lt;int&gt;
-## 1  White 170737
-## 2  Asian  24236
-## 3  Black  17223</code></pre>
+</div>
+<div id="mean-age-and-race-counts-for-males" class="section level3">
+<h3>mean age and race counts for males</h3>
 <pre><code>## # A tibble: 3 × 2
 ##     race count
 ##   &lt;fctr&gt; &lt;dbl&gt;
 ## 1  Asian 27.10
 ## 2  Black 26.61
 ## 3  White 30.70</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##     race  count
+##   &lt;fctr&gt;  &lt;int&gt;
+## 1  White 170737
+## 2  Asian  24236
+## 3  Black  17223</code></pre>
+</div>
+<div id="mean-age-and-race-counts-for-females" class="section level3">
+<h3>mean age and race counts for females</h3>
 <pre><code>## # A tibble: 3 × 2
 ##     race  count
 ##   &lt;fctr&gt;  &lt;int&gt;

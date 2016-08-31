@@ -9,7 +9,7 @@
 
 #' set working directory
 rm(list=ls())
-setwd("FILL ME IN/iussp-mainz-social-media/Twitter")
+setwd("FILL ME IN/iussp-mainz-social-media/Twitter/code")
 
 #' load libraries
 library(rjson)
@@ -40,7 +40,7 @@ face_plus_plus_estimator<-c()
 #' make face plus plus table for estimates of twitter user name, age, age range, gender, race
 #' this examples uses the tweets_img_table data frame from Twitter_module.R comprised of:
 #'  "user_name", "user_id",  "user_created_at","tweet_pic_url", "tweet_text"
-#tweets_img_table = tbl_df(read.csv("data/tweets_img_table.csv"))
+#tweets_img_table = tbl_df(read.csv("../data/tweets_img_table.csv"))
 face_plus_plus_table<- tbl_df(matrix(NA,nrow(tweets_img_table),5))
 colnames(face_plus_plus_table)<-c("name","age","range","gender","race")
 
@@ -71,5 +71,5 @@ for (i in 1:length(tweets_img_table$tweet_pic_url)){
 head(face_plus_plus_table)
 
 #' write Face++ table estimates to file
-write.csv(face_plus_plus_table, "data/face_plus_plus_estimates.csv", row.names=FALSE)
+write.csv(face_plus_plus_table, "../data/face_plus_plus_estimates.csv", row.names=FALSE)
 

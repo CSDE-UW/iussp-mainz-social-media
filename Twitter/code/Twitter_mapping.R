@@ -5,7 +5,7 @@
 
 #' set working directory
 rm(list=ls())
-setwd("FILL ME IN/iussp-mainz-social-media/Twitter")
+setwd("FILL ME IN/iussp-mainz-social-media/Twitter/code")
 
 #' load libraries
 #' uncomment the following line the first time you run this file
@@ -19,8 +19,8 @@ library(maps)
 library(png)
 
 #' rearrange data by date
-physical_activity_tweets = unique(tbl_df(read.csv("data/physical_activity_tweets.csv")))
-users_loc = unique(tbl_df(read.csv("data/physical_activity_tweets_loc.csv")))
+physical_activity_tweets = unique(tbl_df(read.csv("../data/physical_activity_tweets.csv")))
+users_loc = unique(tbl_df(read.csv("../data/physical_activity_tweets_loc.csv")))
 physical_activity_tweets<-arrange(physical_activity_tweets, user_created_at)
 
 #' merge data frames
@@ -47,14 +47,14 @@ theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = ele
     axis.title = element_blank(), panel.background = element_blank(), panel.border = element_blank(), panel.grid.major = element_blank(), plot.background = element_blank(), plot.margin = unit(0 * c(-1.5, -1.5, -1.5, -1.5), "lines")) + geom_point(data = points, aes(x = x, y = y), size = .1, alpha = 1/5, color = "darkblue")
 
 #' save map as a .png
-png(filename="tweets-map.png", height = 480 , width = 720, units = "px")
+png(filename="../images/tweets-map.png", height = 480 , width = 720, units = "px")
 plot(tweets.map)
 dev.off()
 
 #' alternative ways to save map
 #plot(tweets.map)
-#dev.print(png, 'tweets-map.png',height = 480 , width = 720, units = "px") 
-#dev.print(pdf, 'tweets-map.pdf')
+#dev.print(png, '../images/tweets-map.png',height = 480 , width = 720, units = "px") 
+#dev.print(pdf, '../images/tweets-map.pdf')
 
 # Map positive only tweets
 
@@ -78,7 +78,7 @@ theme(axis.line = element_blank(), axis.text = element_blank(), axis.ticks = ele
 geom_point(data = positive_points, aes(x = x, y = y), size = .75, alpha = 1/5, color = "blue")
 
 #' Save map of positive only tweets
-png(filename="images/positive_tweets-map.png", height = 480 , width = 720, units = "px")
+png(filename="../images/positive_tweets-map.png", height = 480 , width = 720, units = "px")
 plot(positive_tweets.map)
 dev.off()
 
@@ -106,7 +106,7 @@ negative_tweets.map<-ggplot(map.data) + ggtitle("Negative Tweets Map") +
   geom_point(data = negative_points, aes(x = x, y = y), size = .75, alpha = 1/5, color = "red")
 
 #' Save map of negative only tweets
-png(filename="images/negative_tweets-map.png", height = 480 , width = 720, units = "px")
+png(filename="../images/negative_tweets-map.png", height = 480 , width = 720, units = "px")
 plot(negative_tweets.map)
 dev.off()
 
@@ -117,14 +117,14 @@ dev.off()
 
 #' Save comparison map
 require(gridExtra)
-ggsave("combined_tweets-raw.png", arrangeGrob(positive_tweets.map,negative_tweets.map), dpi = 300)
+ggsave("../images/combined_tweets-raw.png", arrangeGrob(positive_tweets.map,negative_tweets.map), dpi = 300)
 
 #' Improve comparison map image quality by rasterization
-img <- readPNG("combined_tweets-raw.png")
+img <- readPNG("../images/combined_tweets-raw.png")
 grid.raster(img)
 dev.off()
 
 #' Save raster comparison map
-png(filename="combined_tweets-map.png", height = 720 , width = 1200, units = "px")
+png(filename="../images/combined_tweets-map.png", height = 720 , width = 1200, units = "px")
 grid.raster(img)
 dev.off()
