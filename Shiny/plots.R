@@ -68,7 +68,7 @@ p
 
 ## HISTOGRAM OF SENTIMENT ANALYSIS
 
-p <- ggplot(data = d_year, aes(x = sentiment_score, fill = gender)) + 
+p <- ggplot(data = d, aes(x = sentiment_score, fill = gender)) + 
       geom_histogram(binwidth = 1, 
                      aes(y = (..count..)/sum(..count..)),  col = 'darkgrey') + 
       scale_fill_brewer(palette = "Set1") + 
