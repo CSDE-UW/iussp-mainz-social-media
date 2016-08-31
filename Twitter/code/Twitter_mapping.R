@@ -113,7 +113,6 @@ png(filename="../images/negative_tweets-map.png", height = 480 , width = 720, un
 plot(negative_tweets.map)
 dev.off()
 
-
 #' Compare positive and negative tweet maps side-by-side
 grid.arrange(positive_tweets.map,negative_tweets.map, ncol=2)
 dev.off()

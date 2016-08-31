@@ -95,6 +95,11 @@ getCommonHashtags(Frankfurt_tweets$name)
 #' The streamR functions interact with Twitter's Streaming API to filter tweets by keywords, users, language, and location. 
 #' See the streamR vignette  by Pablo Barbera for more information about the package.  
 
+system("mkdir ../data")
+#' Windows users may have to manually create a data folder
+
+#' #' create a streaming object to download tweets
+#' this object can be called again and will append new tweets to the existing file
 physical_activity_tweets_stream<-filterStream("../data/physical_activity_tweets.json",
                                              timeout = 120, language = "en", 
                                              track = c("#walking, #biking, #running, 
@@ -149,6 +154,8 @@ write.csv(tweets_img_table, "../data/tweets_img_table.csv")
 
 #write.csv(tweets_table, "../data/physical_activity_tweets.csv", row.names = FALSE)
 
+#' unzip physical_activity_tweets.zip
+#' place physical_activity_tweets.csv in the data folder you created earlier
 physical_activity_tweets = tbl_df(read.csv("../data/physical_activity_tweets.csv"))
 
 ## View summary statistics ## 
