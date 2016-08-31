@@ -4,7 +4,7 @@ library(plyr)
 library(dplyr)
 library(lubridate)
 
-d <- read.csv("physical_activity_tweets.csv")
+d <- read.csv("../../Twitter/physical_activity_tweets.csv")
 
 shinyServer(function(input, output) {
   #histogram of sentiments
