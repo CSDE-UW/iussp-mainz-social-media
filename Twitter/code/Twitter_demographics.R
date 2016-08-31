@@ -7,6 +7,19 @@
 #   Author:                     Kivan Polimis                                     #
 #---------------------------------------------------------------------------------#
 
+#' set working directory
+rm(list=ls())
+setwd("FILL ME IN/iussp-mainz-social-media/Twitter")
+
+#install.packages(c("plyr", "dplyr", "tidyr"))
+
+#' laod libraries
+library(plyr)
+library(dplyr)
+library(tidyr)
+
+#physical_activity_tweets = tbl_df(read.csv("data/physical_activity_tweets.csv"))
+
 #' demographic characteristics of data
 age_demo <- physical_activity_tweets %>% summarise(count = round(mean(age),2))
 gender_demo <- physical_activity_tweets %>% group_by(gender) %>% summarise(count = n()) %>% arrange(desc(count))

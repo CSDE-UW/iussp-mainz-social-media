@@ -1,0 +1,3 @@
+# Git novice version control lesson
+
+http://swcarpentry.github.io/git-novice/
