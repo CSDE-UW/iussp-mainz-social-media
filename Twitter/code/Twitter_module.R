@@ -26,15 +26,15 @@ library(lubridate)
 library(stringr)
 library(base64enc)
 
-#' uncommenting the following lines may help install twitteR package
+#' if the twitteR package doesn't install initially, uncommenting the following lines may help 
 #install.packages("devtools")
 #library(devtools)
 #devtools::install_github("jrowen/twitteR", ref = "oauth_httr_1_0")
 
 #' Pablo Barbera, author of streamR, has written additional functions for Twitter analysis
 #' uncomment the two commands below to download and add these functions to your environment with source
-#download.file("https://raw.githubusercontent.com/pablobarbera/social-media-workshop/master/functions.r", "../src/functions_by_pablobarbera.R")
-#source("../src/functions_by_pablobarbera.R")
+#download.file("https://raw.githubusercontent.com/pablobarbera/social-media-workshop/master/functions.r","../src/functions_by_pablobarbera.R")
+source("../src/functions_by_pablobarbera.R")
 
 #' few functions to clean data
 source("../src/twitterFunctions.R") 
@@ -58,19 +58,22 @@ authURL<- "https://api.twitter.com/oauth/authorize"
 twitCred<- OAuthFactory$new(consumerKey=twitter_api_key,consumerSecret=twitter_api_secret,
                             requestURL=reqURL,accessURL=accessURL,authURL=authURL)
 
-#' insert the number in the R console after you run this line
+#' the `twitCred$handshake` will open a window in your browser and ask you to authorize your application
+#' insert the pin number you receive after authorizing in the R console
+twitCred$handshake(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
+
 #' save authenticated credentials for later sessions
 #' for later use, uncomment the following command in a folder that contains twitCred.RData
 #load(twitCred)
-twitCred$handshake(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
 save(twitCred, file = "twitCred.RData")
 
-#' setup direct twitter authentication for twitteR functions
+#' setup direct twitter authentication for twitteR package functions
 #' you will be prompted to cache authentication token
 #' you will need to repeat this step unless you are running analysis from a location with a
 #' cached authentication token 
 setup_twitter_oauth(twitter_api_key, twitter_api_secret,
                     twitter_access_token, twitter_access_token_secret)
+
 ## Gather Data ##  
 
 ### Search tweets by location ###
@@ -237,11 +240,11 @@ group_score_df
 
 ### Save workspace ### 
 #'Save all objects in your current workspace and read back from file in the future
-save.image(file = "EPC2016-Mainz-Twitter.RData")
+save.image(file = "../src/EPC2016-Mainz-Twitter.RData")
 
 #' future R sessions will require you to reload necessary libraries
 #' uncomment the command below to load saved objects in future workspace sessions
-#load("EPC2016-Mainz-Twitter.RData")
+#load("../src/EPC2016-Mainz-Twitter.RData")
 
 
 # Acknowledgements #
