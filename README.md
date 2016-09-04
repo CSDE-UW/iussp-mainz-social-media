@@ -1,12 +1,9 @@
 # IUSSP Mainz Social Media Workshop
 
-This repository contains the materials prepared by <a href = "ezagheni@uw.edu" target ="_blank">Emilio Zagheni</a>
-<sup>[1](#UW)</sup>, <a href = "kpolimis@uw.edu" target ="_blank">Kivan Polimis</a>
-<sup>[1](#UW)</sup>, and <a href = "monicaalexander@berkeley.edu" target ="_blank">Monica Alexander</a>
+This repository contains the materials prepared by <a href = "mailto:ezagheni@uw.edu" target ="_blank">Emilio Zagheni</a>
+<sup>[1](#UW)</sup>, <a href = "mailto:kpolimis@uw.edu" target ="_blank">Kivan Polimis</a>
+<sup>[1](#UW)</sup>, and <a href = "mailto:monicaalexander@berkeley.edu" target ="_blank">Monica Alexander</a>
 <sup>[2](#Berkeley)</sup> for the IUSSP EPC Mainz 2016 Social Medial Workshop.
-
-
-<a href = "ezagheni@uw.edu" target ="_blank">Emilio Zagheni</a>
 
 ## Overview 
 1. Introductions and Intro to Workshop Goals 
