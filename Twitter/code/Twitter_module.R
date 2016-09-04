@@ -67,10 +67,10 @@ twitCred$handshake(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCur
 #load(twitCred)
 save(twitCred, file = "twitCred.RData")
 
-#' setup direct twitter authentication for twitteR package functions
-#' you will be prompted to cache authentication token
-#' you will need to repeat this step unless you are running analysis from a location with a
-#' cached authentication token 
+#' setup direct Twitter authentication for twitteR package functions
+#' you will be prompted to cache an authentication token (.httr-oauth)
+#' you will need to reselect direct authentication when you run `setup_twitter_oauth`
+#' unless you are running an analysis from a location with a cached authentication token 
 setup_twitter_oauth(twitter_api_key, twitter_api_secret,
                     twitter_access_token, twitter_access_token_secret)
 

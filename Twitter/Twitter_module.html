@@ -261,9 +261,9 @@ twitCred$handshake(cainfo = system.file(&quot;CurlSSL&quot;, &quot;cacert.pem&qu
 save(twitCred, file = &quot;twitCred.RData&quot;)
 
 #' setup direct Twitter authentication for twitteR package functions
-#' you will be prompted to cache authentication token
-#' you will need to repeat this step unless you are running analysis from a location with a
-#' cached authentication token 
+#' you will be prompted to cache an authentication token (.httr-oauth)
+#' you will need to reselect direct authentication when you run `setup_twitter_oauth`
+#' unless you are running an analysis from a location with a cached authentication token 
 setup_twitter_oauth(twitter_consumer_key, twitter_consumer_secret,
                     twitter_access_token, twitter_access_token_secret)</code></pre>
 <p>Twitter authentication for streamR (Windows output with <code>download.file</code> executed shown)<br />
@@ -293,26 +293,26 @@ glimpse(Frankfurt_tweets$name)
 getCommonHashtags(Frankfurt_tweets$name)</code></pre>
 <pre><code>## Observations: 50
 ## Variables: 4
-## $ name  &lt;chr&gt; &quot;#illner&quot;, &quot;#burkahontas&quot;, &quot;#AktenzeichenXY&quot;, &quot;#avaliket...
-## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23illner&quot;, &quot;http://twitter...
-## $ query &lt;chr&gt; &quot;%23illner&quot;, &quot;%23burkahontas&quot;, &quot;%23AktenzeichenXY&quot;, &quot;%23...
+## $ name  &lt;chr&gt; &quot;#Armenien&quot;, &quot;#Blockupy&quot;, &quot;#OPENBOOKISOVERPARTY&quot;, &quot;#Jour...
+## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23Armenien&quot;, &quot;http://twitt...
+## $ query &lt;chr&gt; &quot;%23Armenien&quot;, &quot;%23Blockupy&quot;, &quot;%23OPENBOOKISOVERPARTY&quot;, ...
 ## $ woeid &lt;chr&gt; &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;65027...</code></pre>
-<pre><code>##  chr [1:50] &quot;#illner&quot; &quot;#burkahontas&quot; &quot;#AktenzeichenXY&quot; ...</code></pre>
+<pre><code>##  chr [1:50] &quot;#Armenien&quot; &quot;#Blockupy&quot; &quot;#OPENBOOKISOVERPARTY&quot; ...</code></pre>
 <pre><code>## hashtags
-##     #AktenzeichenXY      #Antikriegstag      #AshVsEvilDead 
-##                   1                   1                   1 
-## #avaliketwitter90er     #BackToHogwarts        #Beckenbauer 
-##                   1                   1                   1 
-##   #BerlinerManifest              #biu16           #bohnjour 
-##                   1                   1                   1 
-##        #burkahontas            #Cobra11          #CODXP2016 
-##                   1                   1                   1 
-##         #Dashbutton        #DeadlineDay        #doofeBerufe 
-##                   1                   1                   1 
-##             #fcifcn       #Fliegerbombe      #FragDieLochis 
-##                   1                   1                   1 
-##          #fragkübra              #g20hh 
-##                   1                   1</code></pre>
+##             #6hMexico       #AktenzeichenXY             #Armenien 
+##                     1                     1                     1 
+##        #AshVsEvilDead             #asktopic   #avaliketwitter90er 
+##                     1                     1                     1 
+##       #BackToHogwarts #Battlefield1OpenBeta          #Beckenbauer 
+##                     1                     1                     1 
+##             #Blockupy            #Brasilien          #burkahontas 
+##                     1                     1                     1 
+##               #CLOUDS            #CODXP2016           #Dashbutton 
+##                     1                     1                     1 
+##    #dasperfektedinner          #DeadlineDay         #ESLProLeague 
+##                     1                     1                     1 
+##              #Falcon9               #fcifcn 
+##                     1                     1</code></pre>
 </div>
 <div id="search-twitter-stream-by-subject" class="section level3">
 <h3>Search Twitter stream by subject</h3>
@@ -492,11 +492,11 @@ scores_asian &lt;- score.sentiment(asian_tweets_sample$text,pos, neg)$score</cod
 <pre><code>## # A tibble: 5 × 3
 ##    group `mean score` `score st. dev`
 ##   &lt;fctr&gt;       &lt;fctr&gt;          &lt;fctr&gt;
-## 1   male         0.42            1.07
-## 2 female         0.44            1.07
-## 3  black         0.24            1.03
-## 4  white          0.4            1.05
-## 5  asian         0.37            1.04</code></pre>
+## 1   male         0.42            1.08
+## 2 female         0.36            1.11
+## 3  black         0.23            1.03
+## 4  white          0.4            1.11
+## 5  asian         0.36            1.07</code></pre>
 <div id="save-workspace" class="section level3">
 <h3>Save workspace</h3>
 <p>Save all objects in your current workspace and read back from file in the future</p>
