@@ -98,8 +98,9 @@ getCommonHashtags(Frankfurt_tweets$name)
 #' The streamR functions interact with Twitter's Streaming API to filter tweets by keywords, users, language, and location. 
 #' See the streamR vignette  by Pablo Barbera for more information about the package.  
 
-system("mkdir ../data")
+#' make a data folder to store downloaded tweets
 #' Windows users may have to manually create a data folder
+system("mkdir ../data")
 
 #' #' create a streaming object to download tweets
 #' this object can be called again and will append new tweets to the existing file

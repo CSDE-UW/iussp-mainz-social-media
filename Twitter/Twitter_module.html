@@ -291,28 +291,34 @@ glimpse(Frankfurt_tweets)
 #' trending hashtags
 glimpse(Frankfurt_tweets$name)
 getCommonHashtags(Frankfurt_tweets$name)</code></pre>
-<pre><code>## Observations: 50
+<pre><code>## Observations: 48
 ## Variables: 4
-## $ name  &lt;chr&gt; &quot;#Armenien&quot;, &quot;#Blockupy&quot;, &quot;#OPENBOOKISOVERPARTY&quot;, &quot;#Jour...
-## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23Armenien&quot;, &quot;http://twitt...
-## $ query &lt;chr&gt; &quot;%23Armenien&quot;, &quot;%23Blockupy&quot;, &quot;%23OPENBOOKISOVERPARTY&quot;, ...
+## $ name  &lt;chr&gt; &quot;#besteShow&quot;, &quot;#traumfraugesucht&quot;, &quot;#DeineMutterWitze&quot;, ...
+## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23besteShow&quot;, &quot;http://twit...
+## $ query &lt;chr&gt; &quot;%23besteShow&quot;, &quot;%23traumfraugesucht&quot;, &quot;%23DeineMutterWi...
 ## $ woeid &lt;chr&gt; &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;65027...</code></pre>
-<pre><code>##  chr [1:50] &quot;#Armenien&quot; &quot;#Blockupy&quot; &quot;#OPENBOOKISOVERPARTY&quot; ...</code></pre>
+<pre><code>##  chr [1:48] &quot;#besteShow&quot; &quot;#traumfraugesucht&quot; &quot;#DeineMutterWitze&quot; ...</code></pre>
 <pre><code>## hashtags
-##             #6hMexico       #AktenzeichenXY             #Armenien 
-##                     1                     1                     1 
-##        #AshVsEvilDead             #asktopic   #avaliketwitter90er 
-##                     1                     1                     1 
-##       #BackToHogwarts #Battlefield1OpenBeta          #Beckenbauer 
-##                     1                     1                     1 
-##             #Blockupy            #Brasilien          #burkahontas 
-##                     1                     1                     1 
-##               #CLOUDS            #CODXP2016           #Dashbutton 
-##                     1                     1                     1 
-##    #dasperfektedinner          #DeadlineDay         #ESLProLeague 
-##                     1                     1                     1 
-##              #Falcon9               #fcifcn 
-##                     1                     1</code></pre>
+##                 #BelgianGP                 #besteShow 
+##                          1                          1 
+##                    #BMGB04                    #bpt162 
+##                          1                          1 
+##                    #bvbm05                    #CFCSFL 
+##                          1                          1 
+##          #DeineMutterWitze                    #Didavi 
+##                          1                          1 
+##                     #EULCS                    #FCHFSV 
+##                          1                          1 
+##                   #glowcon                    #HSVFCI 
+##                          1                          1 
+## #justinssextapeleakedparty              #Kirmeskönige 
+##                          1                          1 
+##                    #KOED98              #koellesterin 
+##                          1                          1 
+##                    #kscm60                    #le2708 
+##                          1                          1 
+##          #LetsDrawComeback                  #lnberlin 
+##                          1                          1</code></pre>
 </div>
 <div id="search-twitter-stream-by-subject" class="section level3">
 <h3>Search Twitter stream by subject</h3>
@@ -322,8 +328,9 @@ getCommonHashtags(Frankfurt_tweets$name)</code></pre>
 <li>readTweets</li>
 <li>parseTweets</li>
 </ul>
-<pre class="r"><code>system(&quot;mkdir ../data&quot;)
+<pre class="r"><code>#' make a data folder to store downloaded tweets
 #' Windows users may have to manually create a data folder
+system(&quot;mkdir ../data&quot;)
 
 #' create a streaming object to download tweets
 #' this object can be called again and will append new tweets to the existing file
@@ -350,7 +357,7 @@ tweet_pic_url&lt;-gsub(&quot;_normal&quot;, &quot;&quot;, tweet_pic_url)
 #' make a table of users, profile urls and tweet text
 tweets_img_table= tbl_df(data.frame(tweet_user_name,tweet_user_id,
                                     tweet_user_created_at,tweet_pic_url, tweet_text))
-head(tweets_img_table)
+glimpse(tweets_img_table)
 
 #' alternative way to make a table of users and profile urls
 #' use if character vectors for user name, id, created at or picture url are not equal
@@ -363,7 +370,7 @@ head(tweets_img_table)
 # tweets_img_table[i,4]&lt;-tweet_pic_url[i]
 # tweets_img_table[i,5]&lt;-tweet_textsl[i]
 #}
-#head(tweets_img_table)
+#glimpse(tweets_img_table)
 
 
 #' use Twitter_face_plus_plus.R here to create Face++ API demographic estimates
