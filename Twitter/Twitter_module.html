@@ -201,18 +201,18 @@ library(lubridate)
 library(stringr)
 library(base64enc)
 
-#' uncommenting the following lines may help install twitteR package
+#' if the twitteR package doesn't install initially, uncommenting the following lines may help 
 #install.packages(&quot;devtools&quot;)
 #library(devtools)
 #devtools::install_github(&quot;jrowen/twitteR&quot;, ref = &quot;oauth_httr_1_0&quot;)
 
 #' Pablo Barbera, author of streamR, has written additional functions for Twitter analysis
 #' uncomment the two commands below to download and add these functions to your environment with source
-#download.file(&quot;https://raw.githubusercontent.com/pablobarbera/social-media-workshop/master/functions.r&quot;, &quot;functions_by_pablobarbera.R&quot;)
-source(&quot;src/functions_by_pablobarbera.R&quot;)
+#download.file(&quot;https://raw.githubusercontent.com/pablobarbera/social-media-workshop/master/functions.r&quot;, &quot;../src/functions_by_pablobarbera.R&quot;)
+source(&quot;../src/functions_by_pablobarbera.R&quot;)
 
 #' few functions to clean data
-source(&quot;src/twitterFunctions.R&quot;) </code></pre>
+source(&quot;../src/twitterFunctions.R&quot;) </code></pre>
 </div>
 <div id="twitter-api-authentication" class="section level3">
 <h3>Twitter API Authentication</h3>
@@ -250,18 +250,20 @@ authURL&lt;- &quot;https://api.twitter.com/oauth/authorize&quot;
 twitCred&lt;- OAuthFactory$new(consumerKey=twitter_consumer_key,consumerSecret=twitter_consumer_secret,
                             requestURL=reqURL,accessURL=accessURL,authURL=authURL)
 
-#' executing twitCred$handshake will redirect you to a website and provide your app a PIN
+
+#' executing twitCred$handshake will open a window in your browser and ask you to authorize your application
 #' insert the PIN in the R console after you run this line
-#' you can save authenticated credentials for later sessions
-#' for later use, uncomment the following command in a folder that contains twitCred.RData
-#load(&quot;twitCred.RData&quot;)
 twitCred$handshake(cainfo = system.file(&quot;CurlSSL&quot;, &quot;cacert.pem&quot;, package = &quot;RCurl&quot;))
+
+#' save authenticated credentials for later sessions
+#' for later use, uncomment the following command in a folder that contains twitCred.RData
+#load(twitCred)
 save(twitCred, file = &quot;twitCred.RData&quot;)
 
-#' setup direct Twitter authentication for twitteR functions
-#' you will be prompted to cache authentication token
-#' you will need to repeat this step unless you are running analysis from a location with a
-#' cached authentication token 
+#' setup direct Twitter authentication for twitteR package functions
+#' you will be prompted to cache an authentication token (.httr-oauth)
+#' you will need to reselect direct authentication when you run `setup_twitter_oauth`
+#' unless you are running an analysis from a location with a cached authentication token 
 setup_twitter_oauth(twitter_consumer_key, twitter_consumer_secret,
                     twitter_access_token, twitter_access_token_secret)</code></pre>
 <p>Twitter authentication for streamR (Windows output with <code>download.file</code> executed shown)<br />
@@ -289,33 +291,33 @@ glimpse(Frankfurt_tweets)
 #' trending hashtags
 glimpse(Frankfurt_tweets$name)
 getCommonHashtags(Frankfurt_tweets$name)</code></pre>
-<pre><code>## Observations: 44
+<pre><code>## Observations: 48
 ## Variables: 4
-## $ name  &lt;chr&gt; &quot;#DeadlineDay&quot;, &quot;#Wirschaffendas&quot;, &quot;#biu16&quot;, &quot;#Dash&quot;, &quot;#...
-## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23DeadlineDay&quot;, &quot;http://tw...
-## $ query &lt;chr&gt; &quot;%23DeadlineDay&quot;, &quot;%23Wirschaffendas&quot;, &quot;%23biu16&quot;, &quot;%23D...
+## $ name  &lt;chr&gt; &quot;#besteShow&quot;, &quot;#traumfraugesucht&quot;, &quot;#DeineMutterWitze&quot;, ...
+## $ url   &lt;chr&gt; &quot;http://twitter.com/search?q=%23besteShow&quot;, &quot;http://twit...
+## $ query &lt;chr&gt; &quot;%23besteShow&quot;, &quot;%23traumfraugesucht&quot;, &quot;%23DeineMutterWi...
 ## $ woeid &lt;chr&gt; &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;650272&quot;, &quot;65027...</code></pre>
-<pre><code>##  chr [1:44] &quot;#DeadlineDay&quot; &quot;#Wirschaffendas&quot; &quot;#biu16&quot; &quot;#Dash&quot; ...</code></pre>
+<pre><code>##  chr [1:48] &quot;#besteShow&quot; &quot;#traumfraugesucht&quot; &quot;#DeineMutterWitze&quot; ...</code></pre>
 <pre><code>## hashtags
-##            #Alexanderplatz                      #Apps 
+##                 #BelgianGP                 #besteShow 
 ##                          1                          1 
-##              #Arbeitsmarkt      #Battlefield1OpenBeta 
+##                    #BMGB04                    #bpt162 
 ##                          1                          1 
-## #BeliebersRoastJustinParty                  #Bergfest 
+##                    #bvbm05                    #CFCSFL 
 ##                          1                          1 
-##                     #biu16               #Commerzbank 
+##          #DeineMutterWitze                    #Didavi 
 ##                          1                          1 
-##     #DagiLiebtIhreFansWeil                      #Dash 
+##                     #EULCS                    #FCHFSV 
 ##                          1                          1 
-##               #DeadlineDay        #DolanTwinsNewVideo 
+##                   #glowcon                    #HSVFCI 
 ##                          1                          1 
-##              #Energiewende              #ESLProLeague 
+## #justinssextapeleakedparty              #Kirmeskönige 
 ##                          1                          1 
-##                  #Eurobike                   #Fraport 
+##                    #KOED98              #koellesterin 
 ##                          1                          1 
-##                    #GERFIN         #GetWellSoonSelena 
+##                    #kscm60                    #le2708 
 ##                          1                          1 
-##        #goodbyedeutschland                    #Hartz4 
+##          #LetsDrawComeback                  #lnberlin 
 ##                          1                          1</code></pre>
 </div>
 <div id="search-twitter-stream-by-subject" class="section level3">
@@ -326,17 +328,18 @@ getCommonHashtags(Frankfurt_tweets$name)</code></pre>
 <li>readTweets</li>
 <li>parseTweets</li>
 </ul>
-<pre class="r"><code>system(&quot;mkdir ../data&quot;)
+<pre class="r"><code>#' make a data folder to store downloaded tweets
 #' Windows users may have to manually create a data folder
+system(&quot;mkdir ../data&quot;)
 
 #' create a streaming object to download tweets
 #' this object can be called again and will append new tweets to the existing file
-physical_activity_tweet_stream&lt;-filterStream(&quot;data/physical_activity_tweets.json&quot;, timeout = 120, 
+physical_activity_tweet_stream&lt;-filterStream(&quot;../data/physical_activity_tweets.json&quot;, timeout = 120, 
                                              language = &quot;en&quot;, track = c(&quot;#walking, #biking, #running, 
                                              #jogging, #pushups, #pullups, #homeworkouts,
                                              #bodyweightexercises, #bodyweightworkouts&quot;), oauth = twitCred)
 
-read.physical_activity_tweets &lt;- readTweets(&quot;data/physical_activity_tweets.json&quot;)
+read.physical_activity_tweets &lt;- readTweets(&quot;../data/physical_activity_tweets.json&quot;)
 physical_activity_tweets=unlist(read.physical_activity_tweets)
 
 # `parseTweets` reads in tweets .json file with more available columns than `readTweets`
@@ -354,7 +357,7 @@ tweet_pic_url&lt;-gsub(&quot;_normal&quot;, &quot;&quot;, tweet_pic_url)
 #' make a table of users, profile urls and tweet text
 tweets_img_table= tbl_df(data.frame(tweet_user_name,tweet_user_id,
                                     tweet_user_created_at,tweet_pic_url, tweet_text))
-head(tweets_img_table)
+glimpse(tweets_img_table)
 
 #' alternative way to make a table of users and profile urls
 #' use if character vectors for user name, id, created at or picture url are not equal
@@ -367,7 +370,7 @@ head(tweets_img_table)
 # tweets_img_table[i,4]&lt;-tweet_pic_url[i]
 # tweets_img_table[i,5]&lt;-tweet_textsl[i]
 #}
-#head(tweets_img_table)
+#glimpse(tweets_img_table)
 
 
 #' use Twitter_face_plus_plus.R here to create Face++ API demographic estimates
@@ -383,11 +386,11 @@ head(tweets_img_table)
 #face_plus_plus_table = tbl_df(read.csv(&quot;data/face_plus_plus_estimates.csv&quot;))
 #tweets_table =  inner_join(tweets_img_table, face_plus_plus_table, by = &quot;name&quot;)
 
-write.csv(tweets_table, &quot;data/physical_activity_tweets.csv&quot;, row.names = FALSE)
+write.csv(tweets_table, &quot;../data/physical_activity_tweets.csv&quot;, row.names = FALSE)
 
 #' unzip physical_activity_tweets.zip
 #' place physical_activity_tweets.csv in the data folder you created earlier
-physical_activity_tweets = tbl_df(read.csv(&quot;data/physical_activity_tweets.csv&quot;))</code></pre>
+physical_activity_tweets = tbl_df(read.csv(&quot;../data/physical_activity_tweets.csv&quot;))</code></pre>
 </div>
 </div>
 <div id="view-summary-statistics" class="section level2">
@@ -460,9 +463,9 @@ asian_tweets&lt;- subset(physical_activity_tweets, race == &quot;Asian&quot;)</c
 <div id="sentiment-analysis" class="section level2">
 <h2>Sentiment Analysis</h2>
 <pre class="r"><code># import positive and negative words
-pos = readLines(&quot;opinion_lexicon/positive_words.txt&quot;)
-neg = readLines(&quot;opinion_lexicon/negative_words.txt&quot;)
-source(&quot;opinion_lexicon/sentiment.R&quot;)
+pos = readLines(&quot;../opinion_lexicon/positive_words.txt&quot;)
+neg = readLines(&quot;../opinion_lexicon/negative_words.txt&quot;)
+source(&quot;../opinion_lexicon/sentiment.R&quot;)
 glimpse(pos)
 glimpse(neg)
 
@@ -495,20 +498,20 @@ scores_asian &lt;- score.sentiment(asian_tweets_sample$text,pos, neg)$score</cod
 <h2>Average sentiment by demographic background</h2>
 <pre><code>## # A tibble: 5 × 3
 ##    group `mean score` `score st. dev`
-##    &lt;chr&gt;        &lt;chr&gt;           &lt;chr&gt;
-## 1   male         0.42            1.07
-## 2 female         0.44            1.07
-## 3  black         0.24            1.03
-## 4  white          0.4            1.05
-## 5  asian         0.37            1.04</code></pre>
+##   &lt;fctr&gt;       &lt;fctr&gt;          &lt;fctr&gt;
+## 1   male         0.42            1.08
+## 2 female         0.36            1.11
+## 3  black         0.23            1.03
+## 4  white          0.4            1.11
+## 5  asian         0.36            1.07</code></pre>
 <div id="save-workspace" class="section level3">
 <h3>Save workspace</h3>
 <p>Save all objects in your current workspace and read back from file in the future</p>
-<pre class="r"><code>save.image(file = &quot;EPC2016-Mainz-Twitter.RData&quot;)
+<pre class="r"><code>save.image(file = &quot;../src/EPC2016-Mainz-Twitter.RData&quot;)
 
 #' future R sessions will require you to reload necessary libraries
 #' uncomment the command below to load saved objects in future workspace sessions
-#load(&quot;EPC2016-Mainz-Twitter.RData&quot;)</code></pre>
+#load(&quot;../src/EPC2016-Mainz-Twitter.RData&quot;)</code></pre>
 </div>
 </div>
 </div>
