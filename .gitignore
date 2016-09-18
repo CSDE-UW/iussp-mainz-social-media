@@ -1,6 +1,6 @@
 # History files
-.Rhistory
-.Rapp.history
+*.Rhistory
+*.Rapp.history
 
 # Session Data files
 *.RData
@@ -15,7 +15,7 @@
 /*.Rcheck/
 
 # RStudio files
-.Rproj.user/
+*.Rproj.user/
 
 # produced vignettes
 vignettes/*.html
@@ -36,3 +36,6 @@ vignettes/*.pdf
 Twitter_module.Rmd
 Twitter/data/*
 Twitter/images/*
+
+# Documents
+_docs/*
