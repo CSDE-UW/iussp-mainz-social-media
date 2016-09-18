@@ -36,3 +36,6 @@ vignettes/*.pdf
 Twitter_module.Rmd
 Twitter/data/*
 Twitter/images/*
+
+# Documents
+_docs/*
