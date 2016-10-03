@@ -39,3 +39,6 @@ Twitter/images/*
 
 # Documents
 _docs/*
+
+# Mac files
+*.DS_Store
