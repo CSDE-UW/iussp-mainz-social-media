@@ -123,40 +123,49 @@ tweet_user_created_at=physical_activity_tweets[names(physical_activity_tweets)==
 tweet_pic_url=physical_activity_tweets[names(physical_activity_tweets)=="user.profile_image_url"]
 tweet_text=physical_activity_tweets[names(physical_activity_tweets)=="text"]
 
+
 #' removing "_normal"" from url for figure details estimates
 tweet_pic_url<-gsub("_normal", "", tweet_pic_url)
 
 #' make a table of users, profile urls and tweet text
 tweets_img_table= tbl_df(data.frame(tweet_user_name,tweet_user_id,
-                                    tweet_user_created_at,tweet_pic_url, tweet_text))
+                                    tweet_user_created_at,tweet_pic_url))
 head(tweets_img_table)
-write.csv(tweets_img_table, "../data/tweets_img_table.csv")
+
 #' alternative way to make a table of users and profile urls
 #' use if character vectors for user name, id, created at or picture url are not equal
-#tweets_table <- tbl_df(matrix(NA,length(tweet_user_name),5))
-#colnames(tweets_img_table)<-c("user_name", "user_id",  "user_created_at","tweet_pic_url", "tweet_text")
+#tweets_table <- tbl_df(matrix(NA,length(tweet_user_name),4))
+#colnames(tweets_img_table)<-c("user_name", "user_id",  "user_created_at","tweet_pic_url")
 #for (i in 1:length(tweet_user_name)){
 # tweets_img_table[i,1]<-tweet_user_name[i]
 # tweets_img_table[i,2]<-tweet_user_id[i]
 # tweets_img_table[i,3]<-tweet_user_created_at[i]
 # tweets_img_table[i,4]<-tweet_pic_url[i]
-# tweets_img_table[i,5]<-tweet_texts[i]
 #}
-#head(tweets_img_table)
+#glimpse(tweets_img_table)
+
 
 #' use Twitter_face_plus_plus.R here to create Face++ API demographic estimates
 #' join tweets_img_table with Face++ demographic estimates
 #' convert user_created_at into lubridate object with lubridate_tweet_datestring function
-#' example of advantages of lubridate object: plotting,algebraic manipulation on date-time objects.
-#tweets_img_table$user_timestamp = sapply(tweets_img_table$user_created_at,lubridate_tweet_datestring)
-#drops = "user_created_at"
-#tweets_img_table = tweets_img_table[, !(names(tweets_img_table) %in% drops)]
-#tweets_img_table = dplyr::rename(tweets_img_table, user_created_at = user_timestamp)
-#tweets_img_table = dplyr::rename(tweets_img_table, name = tweet_user_name)
-#face_plus_plus_table = tbl_df(read.csv("../data/face_plus_plus_estimates.csv"))
-#tweets_table =  inner_join(tweets_img_table, face_plus_plus_table, by = "name")
+#' example of advantages of lubridate object: plotting, algebraic manipulation on date-time objects.
+# i <- sapply(tweets_img_table, is.factor)
+# tweets_img_table[i] <- lapply(tweets_img_table[i], as.character)
+# tweets_img_table$user_timestamp = strptime(sapply(tweets_img_table$tweet_user_created_at,lubridate_tweet_datestring), format = "%m-%d-%Y %H:%M")
+# drops = "tweet_user_created_at"
+# tweets_img_table = tweets_img_table[, !(names(tweets_img_table) %in% drops)]
+# tweets_img_table = dplyr::rename(tweets_img_table, user_created_at = user_timestamp)
+# tweets_img_table = dplyr::rename(tweets_img_table, name = tweet_user_name)
+# hist(year(tweets_img_table$user_created_at))
+# write.csv(tweets_img_table, "data/tweets_img_table.csv")
 
-#write.csv(tweets_table, "../data/physical_activity_tweets.csv", row.names = FALSE)
+
+#' see Twitter_face_plus_plus.R to create face_plus_plus_table
+#face_plus_plus_table = tbl_df(read.csv("data/face_plus_plus_estimates.csv"))
+#tweets_table =  inner_join(tweets_img_table, face_plus_plus_table, by = "name")
+#write.csv(tweets_table, "data/physical_activity_tweets.csv", row.names = FALSE)
+
+physical_activity_tweets = tbl_df(read.csv("data/physical_activity_tweets.csv"))
 
 #' unzip physical_activity_tweets.zip
 #' place physical_activity_tweets.csv in the data folder you created earlier
